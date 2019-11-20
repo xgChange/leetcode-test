@@ -24,19 +24,29 @@ MyStack.prototype.push = function(x) {
  * Removes the element on top of the stack and returns that element.
  * @return {number}
  */
+/**
+ * 
+  MyStack.prototype.pop = function() {  // 循环队列实现栈
+    if (this.empty()) return false
+    let index = this.queue1.length - 1
+    while (index) {
+      this.queue1.push(this.queue1.shift())
+      index-- 
+    }
+    let rt = this.queue1.shift()
+    return rt
+  }
+ */
 MyStack.prototype.pop = function() {
   if (this.empty()) return false
-  if (this.queue1.length !== 0 && this.queue2.length === 0) {
-    while (this.queue1.length !== 1) {
-      this.queue2.push(this.queue1.shift())
-    }
-    return this.queue1.shift()
-  } else if (this.queue1.length === 0 && this.queue2.length !== 0) {
-    while (this.queue2.length !== 1) {
-      this.queue1.push(this.queue2.shift())
-    }
-    return this.queue2.shift()
+  while (this.queue1.length !== 1) {
+    this.queue2.push(this.queue1.shift())
   }
+  let rt = this.queue1.shift()
+  while (this.queue2.length) {
+    this.queue1.push(this.queue2.shift())
+  }
+  return rt
 }
 
 /**
@@ -59,19 +69,21 @@ MyStack.prototype.empty = function() {
 }
 
 let mystack = new MyStack()
-mystack.push([])
-mystack.push([1])
-mystack.push([2])
-mystack.push([])
-mystack.push([])
-mystack.push([])
+mystack.push(1)
+mystack.push(2)
+mystack.push(3)
 mystack.pop()
-mystack.pop()
-mystack.pop()
-mystack.pop()
-mystack.pop()
-mystack.pop()
+console.log(mystack)
+mystack.push(4)
+console.log(mystack)
 
-// console.log(mystack.top())
+mystack.pop()
+console.log(mystack)
+
+mystack.push(5)
+mystack.push(6)
+console.log(mystack)
+
+console.log(mystack.top())
 // ["MyStack","push","push","top","pop","empty"]
 // [[],[1],[2],[],[],[]]

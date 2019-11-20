@@ -18,11 +18,14 @@ MyQueue.prototype.push = function(x) {
  */
 MyQueue.prototype.pop = function() {
   if (this.empty()) return false
-  if (this.stack1.length !== 0 && this.stack2.length === 0) {
-    while (this.stack1.length !== 0) {
-      this.stack2.push(this.stack1.pop())
-    }
-  } else if (this.stack2.length !== 0) return this.stack2.pop()
+  while (this.stack1.length) {
+    this.stack2.push(this.stack1.pop())
+  }
+  let rt = this.stack2.pop()
+  while (this.stack2.length) {
+    this.stack1.push(this.stack2.pop())
+  }
+  return rt
 }
 
 /**
