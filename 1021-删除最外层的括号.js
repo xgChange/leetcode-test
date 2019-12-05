@@ -2,15 +2,11 @@ var removeOuterParentheses = function(S) {
   let strArr = S.split("")
   let rtArr = []
   let A = primitive(strArr, rtArr)
-  // console.log("A: ", A)
   let res = ""
   for (let item of A) {
     res += item.slice(1, item.length - 1).join("")
   }
   return res
-  // let B = primitive(strArr)
-  // console.log("B: ", B)
-  // return A.slice(1, A.length - 1).join("") + B.slice(1, B.length - 1).join("")
 }
 
 function primitive(temp, rtArr) {
